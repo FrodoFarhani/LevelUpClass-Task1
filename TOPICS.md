@@ -6,10 +6,16 @@
 
 > [https://github.com/remarkjs/strip-markdown/blob/master/index.js]
 
-# logging
+# Logging
 
 - I find `winston` as a proper package to log events in this app. Here are npm link and the way we can use this package:
 
 > [https://www.npmjs.com/package/winston]
 
 >[https://www.loggly.com/ultimate-guide/node-logging-basics/]
+
+# Jest
+
+- I have used `jest` as testing tool for this application, here is a good documention for that:
+
+>[https://flaviocopes.com/jest/]
