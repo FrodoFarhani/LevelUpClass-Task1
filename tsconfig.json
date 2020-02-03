@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    "target": "es2017",
     "module": "commonjs",
     "moduleResolution": "node",
     "strict": true,
@@ -8,6 +8,9 @@
     "emitDecoratorMetadata": true,
     "noUnusedLocals": true,
     "pretty": true,
+    "allowSyntheticDefaultImports": true, /* Allow default imports from modules with no default export. This does not affect code emit, just typechecking. */
+    "esModuleInterop": true,
+    "noUnusedParameters": true,
     "outDir": "dist",
     "baseUrl": ".",
     "lib": [
@@ -19,7 +22,7 @@
       "~src/*": [
         "./src/*"
       ]
-    },
+    }
   },
   "include": [
     "src/**/*"

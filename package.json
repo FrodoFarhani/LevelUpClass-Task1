@@ -12,14 +12,18 @@
     "test": "npm run test:jest --",
     "posttest": "npm run format",
     "lint": "eslint . --cache --fix",
-    "format": "prettier --loglevel warn --write \"**/*.{js,css,md}\""
+    "format": "prettier --loglevel warn --write \"**/*.{js,ts,css,md}\""
   },
   "devDependencies": {
+    "@types/jest": "^25.1.1",
+    "@types/node": "^13.7.0",
     "eslint": "^6.8.0",
     "husky": "^4.2.1",
     "jest": "^25.1.0",
     "lint-staged": "^10.0.3",
+    "mock-stdin": "^1.0.0",
     "prettier": "^1.19.1",
+    "ts-jest": "^25.1.0",
     "typescript": "^3.7.5"
   },
   "husky": {
@@ -28,12 +32,29 @@
     }
   },
   "lint-staged": {
-    "*.js": [
+    "*.ts": [
       "eslint --cache --fix",
-      "prettier --loglevel warn --write \"**/*.{js,css,md}\""
+      "prettier --loglevel warn --write \"**/*.{ts,js,css,md}\""
     ]
   },
   "dependencies": {
-    "@types/node": "^13.5.1"
+    "winston": "^3.2.1"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "<rootDir>/lib/"
+    ],
+    "transform": {
+      "^.+\\.tsx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json"
+    ]
   }
 }
