@@ -1,32 +1,31 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const readline = require("readline");
-/* eslint-disable @typescript-eslint/class-name-casing */
-class getInputString {
-    async inputString() {
-        const rl = readline.createInterface({
-            input: process.stdin,
-            output: process.stdout
-        });
-        const promise = new Promise(resolve => {
-            let input = "";
-            rl.question("\r\nPlease enter your html code:\r\n", (recievedString) => {
-                input += recievedString;
-            });
-            rl.on("line", (recievedString) => {
-                input += "\r\n";
-                input += recievedString;
-            });
-            rl.on("close", () => {
-                console.log("\r\n\r\n **********    thanks !    **********");
-                resolve(input);
-                rl.close();
-            });
-        });
-        return promise.then(recievedString => {
-            return recievedString;
-        });
-    }
+const MESSAGE = `
+	Please enter your html code:
+	* NOTE: PLEASE ENTER CTRL+C after entering your input string
+	
+	`;
+const FINAL_MESSAGE = `
+	Please enter your html code:
+	`;
+class GetInputString {
+	async inputString() {
+		let inputString = "";
+		const readlineObject = readline.createInterface({
+			input: process.stdin
+		});
+		readlineObject.question(MESSAGE);
+		readlineObject.on("line", data => {
+			inputString += "\r\n";
+			inputString += data;
+		});
+		readlineObject.on("close", () => {
+			console.log(FINAL_MESSAGE);
+			readlineObject.close();
+		});
+		return inputString;
+	}
 }
-exports.getInputString = getInputString;
+exports.GetInputString = GetInputString;
 //# sourceMappingURL=getInput.js.map

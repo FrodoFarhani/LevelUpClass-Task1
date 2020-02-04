@@ -27,11 +27,11 @@
     }
   },
   "include": [
-    "src/**/*.ts",
-    "__tests__/**/*"
+    "src/**/*.ts"
   ],
   "compileOnSave": true,
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "__tests__"
   ]
 }

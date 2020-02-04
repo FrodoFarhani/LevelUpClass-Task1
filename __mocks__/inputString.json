@@ -1,7 +1,4 @@
 {
-    "simpleData":"<p>test!</p>",
-    "simpleDataResult":"test",
-    "pureData":"test",
-    "markDownData":"test&testing!markdown%%data would @@ be challenging! ",
-    "markDownDataResult":"test testing markdown data would  be challenging "
+    "DATA_SAMPLE": "<p>test!</p>\r\n<h1>hi</h1>"
 }
+ 
