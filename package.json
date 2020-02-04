@@ -12,18 +12,27 @@
     "test": "npm run test:jest --",
     "posttest": "npm run format",
     "lint": "eslint . --cache --fix",
-    "format": "prettier --loglevel warn --write \"**/*.{js,ts,css,md}\""
+    "format": "prettier --loglevel warn --write \"**/*.{js,ts,css,md}\"",
+    "build": "npm-run-all clean lint tsc copy-assets"
   },
   "devDependencies": {
     "@types/jest": "^25.1.1",
     "@types/node": "^13.7.0",
+    "@typescript-eslint/eslint-plugin": "^2.18.0",
+    "@typescript-eslint/parser": "^2.18.0",
     "eslint": "^6.8.0",
+    "fs-extra": "^8.1.0",
     "husky": "^4.2.1",
     "jest": "^25.1.0",
     "lint-staged": "^10.0.3",
     "mock-stdin": "^1.0.0",
+    "nodemon": "^2.0.2",
+    "npm-run-all": "^4.1.5",
     "prettier": "^1.19.1",
+    "rimraf": "^3.0.1",
+    "shelljs": "^0.8.3",
     "ts-jest": "^25.1.0",
+    "ts-node": "^8.6.2",
     "typescript": "^3.7.5"
   },
   "husky": {
@@ -32,12 +41,15 @@
     }
   },
   "lint-staged": {
-    "*.ts": [
+    "*.js": [
       "eslint --cache --fix",
       "prettier --loglevel warn --write \"**/*.{ts,js,css,md}\""
     ]
   },
   "dependencies": {
+    "inquirer": "^7.0.4",
+    "prompt": "^1.0.0",
+    "promt": "^0.0.0",
     "winston": "^3.2.1"
   },
   "jest": {

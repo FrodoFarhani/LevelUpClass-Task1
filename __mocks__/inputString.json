@@ -1,0 +1,7 @@
+{
+    "simpleData":"<p>test!</p>",
+    "simpleDataResult":"test",
+    "pureData":"test",
+    "markDownData":"test&testing!markdown%%data would @@ be challenging! ",
+    "markDownDataResult":"test testing markdown data would  be challenging "
+}

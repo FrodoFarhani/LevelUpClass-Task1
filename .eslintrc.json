@@ -27,6 +27,7 @@
   ],
   "rules": {
     "@typescript-eslint/array-type": "off", // Styling not forced upon the student
+    "@typescript-eslint/no-var-requires": 0,
     "@typescript-eslint/explicit-function-return-type": [
       "warn",
       {
