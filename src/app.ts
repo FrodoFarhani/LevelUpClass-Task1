@@ -1,7 +1,7 @@
-import { getInputString } from "./stringSanitizer/getInput";
+import { GetInputString } from "./stringSanitizer/getInput";
 
 
-new getInputString().inputString().then((res) => {
-        console.log("res app:", res);
-    });
+new GetInputString().inputString().then(res => {
+	console.log("res app:", res);
+});
      

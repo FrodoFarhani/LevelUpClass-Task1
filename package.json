@@ -11,7 +11,7 @@
     "pretest": "npm run lint && tsc --noEmit",
     "test": "npm run test:jest --",
     "posttest": "npm run format",
-    "lint": "eslint . --cache --fix",
+    "lint": "eslint ./src/**/* --cache --fix",
     "format": "prettier --loglevel warn --write \"**/*.{js,ts,css,md}\"",
     "build": "npm-run-all clean lint tsc copy-assets"
   },

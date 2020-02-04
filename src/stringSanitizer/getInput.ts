@@ -3,16 +3,16 @@ const readline = require("readline");
 const MESSAGE =
 	"\r\n************ PLEASE ENTER CTRL+C after entering your input string ************\r\nPlease enter your html code:\r\n";
 const FINAL_MESSAGE = "\r\nPlease enter your html code:\r\n";
-export class getInputString {
-	async inputString(): Promise<any>  {
+export class GetInputString {
+	async inputString(): Promise<string>  {
 		
 		const rl = readline.createInterface({
 			input: process.stdin,
 			output: process.stdout
 			});
 
-		const promise = new Promise(resolve => {
-			let inputString: string='';
+		const promise = new Promise<string>(resolve => {
+			let inputString='';
 			
 			rl.question(MESSAGE, (recievedString: string) => {
 				inputString += recievedString;
@@ -28,7 +28,7 @@ export class getInputString {
 			});
 		});
 
-		return promise.then(recievedString => {
+		return promise.then((recievedString: string) => {
 			return recievedString;
 		});
  

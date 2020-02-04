@@ -1,6 +1,6 @@
 let stdin = require("mock-stdin").stdin();
 const mockedData = require("../../__mocks__/inputString.json");
-import { getInputString } from "../../src/stringSanitizer/getInput";
+import { GetInputString } from "../../src/stringSanitizer/getInput";
 
 describe("getInput", () => {
 	beforeEach(() => {
@@ -16,7 +16,7 @@ describe("getInput", () => {
 			stdin.end();
 		});
 		
-		const getInputStringObject = new getInputString();
+		const getInputStringObject = new GetInputString();
 		const result = await getInputStringObject.inputString();
 
 		expect(result).toBe(mockedData.simpleData);
