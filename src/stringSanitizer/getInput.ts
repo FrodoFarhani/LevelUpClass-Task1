@@ -6,7 +6,7 @@ const FINAL_MESSAGE = "\r\nPlease enter your html code:\r\n";
 export class GetInputString {
 	async inputString(): Promise<string>  {
 		
-		const rl = readline.createInterface({
+		const readlineObject = readline.createInterface({
 			input: process.stdin,
 			output: process.stdout
 			});
@@ -14,24 +14,25 @@ export class GetInputString {
 		const promise = new Promise<string>(resolve => {
 			let inputString='';
 			
-			rl.question(MESSAGE, (recievedString: string) => {
-				inputString += recievedString;
+			readlineObject.question(MESSAGE, (data: string) => {
+				inputString += data;
 			});
-			rl.on("line", (recievedString: string) => {
+			readlineObject.on("line", (data: string) => {
 				inputString += "\r\n";
-				inputString += recievedString;
+				inputString += data;
 			});
-			rl.on("close", () => {
+			readlineObject.on("close", () => {
 				console.log(FINAL_MESSAGE);
 				resolve(inputString);
-				rl.close();
+				readlineObject.close();
 			});
 		});
 
-		return promise.then((recievedString: string) => {
-			return recievedString;
+		const userInput: Promise<string>= promise.then((data: string) => {
+			return data;
 		});
- 
+
+		return userInput;
 	}
 }
 
