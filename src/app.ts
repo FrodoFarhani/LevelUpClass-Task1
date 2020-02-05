@@ -1,5 +1,6 @@
 import { GetInputString } from "./stringSanitizer/getInput";
 
-new GetInputString().inputString().then(res => {
-	console.log("res app:", res);
+const t = new GetInputString();
+t.inputString.then(res => {
+	console.log("res:", res);
 });
