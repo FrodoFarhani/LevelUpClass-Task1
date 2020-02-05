@@ -25,7 +25,7 @@ export class GetInputString {
 			});
 
 			readlineObject.on("line", (data: string) => {
-				inputString += "\r\n";
+				inputString += "\n";
 				inputString += data;
 			});
 			readlineObject.on("close", () => {

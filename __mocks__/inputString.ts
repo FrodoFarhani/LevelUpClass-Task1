@@ -1,3 +1,6 @@
-const DATA_SAMPLE = `test string`;
+const SIMPLE_DATA = `test string`;
+const MARKDOWN_DATA = `test&&!# string***///`;
+const HTML_DATA = `<p>test string</p>
+<h1>test H1</h1>`;
 
-export default DATA_SAMPLE;
+export { SIMPLE_DATA, MARKDOWN_DATA, HTML_DATA };
