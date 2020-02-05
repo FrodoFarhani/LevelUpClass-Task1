@@ -1,16 +1,17 @@
-const readline = require("readline");
+import logger from "../logger/logger";
+import readline from "readline";
 
 const MESSAGE = `Please enter your html code: 
 > NOTE:PLEASE ENTER CTRL+C after entering your input string
 	
 	`;
-const FINAL_MESSAGE = `
-
-******* Thank you! *******
-
-	`;
 export class GetInputString {
-	public inputString = new Promise<string>(resolve => {
+	requestId = 0;
+	constructor(requestId: number) {
+		this.requestId = requestId;
+	}
+
+	public inputString = new Promise<string>((resolve, reject) => {
 		let inputString = "";
 
 		const readlineObject = readline.createInterface({
@@ -18,18 +19,24 @@ export class GetInputString {
 			output: process.stdout
 		});
 
-		readlineObject.question(MESSAGE, (data: string) => {
-			inputString += data;
-		});
+		try {
+			readlineObject.question(MESSAGE, (data: string) => {
+				inputString += data;
+			});
 
-		readlineObject.on("line", (data: string) => {
-			inputString += "\r\n";
-			inputString += data;
-		});
-		readlineObject.on("close", () => {
-			console.log(FINAL_MESSAGE);
-			resolve(inputString);
+			readlineObject.on("line", (data: string) => {
+				inputString += "\r\n";
+				inputString += data;
+			});
+			readlineObject.on("close", () => {
+				logger.infoLog(this.requestId, inputString);
+				resolve(inputString);
+				readlineObject.close();
+			});
+		} catch (error) {
+			logger.errorLog(this.requestId, error);
+			reject(new Error(error));
 			readlineObject.close();
-		});
+		}
 	});
 }

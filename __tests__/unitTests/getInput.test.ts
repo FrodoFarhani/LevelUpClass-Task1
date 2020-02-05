@@ -13,9 +13,7 @@ describe("getInput", () => {
 		process.nextTick(() => {
 			stdin.end();
 		});
-
-		await new GetInputString().inputString.then(result => {
-			expect(result).toBe(DATA_SAMPLE);
-		});
+		let result = await new GetInputString().inputString;
+		expect(result).toBe(DATA_SAMPLE);
 	});
 });

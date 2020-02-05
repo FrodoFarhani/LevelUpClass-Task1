@@ -14,6 +14,8 @@
 
 > [https://www.loggly.com/ultimate-guide/node-logging-basics/]
 
+logs will be saved in project directory in `logs` folder.
+
 # Jest
 
 - I have used `jest` as testing tool for this application, here is a good documention for that:
