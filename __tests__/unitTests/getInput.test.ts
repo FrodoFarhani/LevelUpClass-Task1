@@ -3,7 +3,8 @@ import { GetInputString } from "../../src/stringSanitizer/getInput";
 import {
 	SIMPLE_DATA,
 	MARKDOWN_DATA,
-	HTML_DATA
+	HTML_DATA,
+	HTML_DATA_RECIEVED
 } from "../../__mocks__/inputString";
 
 describe("getInput", () => {
@@ -42,8 +43,6 @@ describe("getInput", () => {
 			stdin.end();
 		});
 		let result = await new GetInputString(requestId).inputString;
-		console.log("hyml:", HTML_DATA);
-
-		expect(result).toBe(HTML_DATA);
+		expect(result).toBe(HTML_DATA_RECIEVED);
 	});
 });

@@ -23,10 +23,8 @@ export class GetInputString {
 			readlineObject.question(MESSAGE, (data: string) => {
 				inputString += data;
 			});
-
 			readlineObject.on("line", (data: string) => {
-				inputString += "\n";
-				inputString += data;
+				inputString += ` ${data}`;
 			});
 			readlineObject.on("close", () => {
 				logger.infoLog(this.requestId, inputString);

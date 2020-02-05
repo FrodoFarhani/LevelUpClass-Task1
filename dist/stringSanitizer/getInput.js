@@ -6,7 +6,7 @@ var __importDefault =
 	};
 Object.defineProperty(exports, "__esModule", { value: true });
 const logger_1 = __importDefault(require("../logger/logger"));
-const readline = require("readline");
+const readline_1 = __importDefault(require("readline"));
 const MESSAGE = `Please enter your html code: 
 > NOTE:PLEASE ENTER CTRL+C after entering your input string
 	
@@ -16,7 +16,7 @@ class GetInputString {
 		this.requestId = 0;
 		this.inputString = new Promise((resolve, reject) => {
 			let inputString = "";
-			const readlineObject = readline.createInterface({
+			const readlineObject = readline_1.default.createInterface({
 				input: process.stdin,
 				output: process.stdout
 			});
@@ -25,8 +25,7 @@ class GetInputString {
 					inputString += data;
 				});
 				readlineObject.on("line", data => {
-					inputString += "\r\n";
-					inputString += data;
+					inputString += ` ${data}`;
 				});
 				readlineObject.on("close", () => {
 					logger_1.default.infoLog(this.requestId, inputString);
