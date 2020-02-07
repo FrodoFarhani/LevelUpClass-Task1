@@ -1,6 +1,6 @@
 import { MockService } from "./../../__mocks__/mockService";
 
-describe("Service", () => {
+xdescribe("Service", () => {
 	test("Should POST resquest", async () => {
 		const testInput = "test text";
 
@@ -13,7 +13,7 @@ describe("Service", () => {
 	test("Should reject POST resquest", async () => {
 		const testInput = "test text";
 		const mockService = new MockService(testInput);
-		
+
 		try {
 			await mockService.rejectPost();
 		} catch (error) {
