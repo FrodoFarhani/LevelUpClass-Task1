@@ -1,18 +1,26 @@
-//import { GetInputString } from "./stringSanitizer/getInput";
+import { GetInputString } from "./stringSanitizer/getInput";
 import { Sanitizer } from "./stringSanitizer/sanitizer";
-//import logger from "./logger/logger";
+import { Service } from "./service/service";
+import logger from "./logger/logger";
 
-const requestId = Math.floor(Math.random() * Math.floor(1000));
+const App = async (): Promise<void> => {
+	const URL = "/posts";
+	const requestId = Math.floor(Math.random() * Math.floor(1000));
 
-const test = async (): Promise<void> => {
-	//const t = new GetInputString(requestId);
-	//const result = await t.inputString;
+	try {
+		const getInputString = await new GetInputString(requestId).inputString;
+		const sanitizedInput = new Sanitizer(getInputString, requestId).sanitize();
 
-	const res = new Sanitizer(
-		"<p>test string</p><h1>test dfd</h1>",
-		requestId
-	).sanitize();
-	console.log("res:", res);
-	//return result2;
+		const result = await new Service(requestId).postData(URL, sanitizedInput);
+
+		console.log("\n\n Your sanitized input that post to input:\n", result);
+	} catch (error) {
+		logger.errorLog(requestId, error);
+		console.log(
+			"\n\n *** OOPS! Something wrong, please follow up your issue with this ID:\n",
+			requestId
+		);
+	}
 };
-test();
+
+App();

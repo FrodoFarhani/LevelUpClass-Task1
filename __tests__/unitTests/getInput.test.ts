@@ -7,7 +7,7 @@ import {
 	HTML_DATA_RECIEVED
 } from "../../__mocks__/inputString";
 
-describe("getInput", () => {
+xdescribe("getInput", () => {
 	beforeEach(() => {
 		stdin = require("mock-stdin").stdin();
 	});

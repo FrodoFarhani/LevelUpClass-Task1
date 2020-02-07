@@ -1,18 +1,36 @@
 "use strict";
+var __importDefault =
+	(this && this.__importDefault) ||
+	function(mod) {
+		return mod && mod.__esModule ? mod : { default: mod };
+	};
 Object.defineProperty(exports, "__esModule", { value: true });
-//import { GetInputString } from "./stringSanitizer/getInput";
+const getInput_1 = require("./stringSanitizer/getInput");
 const sanitizer_1 = require("./stringSanitizer/sanitizer");
-//import logger from "./logger/logger";
-const requestId = Math.floor(Math.random() * Math.floor(1000));
-const test = async () => {
-	//const t = new GetInputString(requestId);
-	//const result = await t.inputString;
-	const res = new sanitizer_1.Sanitizer(
-		"<p>test string</p><h1>test dfd</h1>",
-		requestId
-	).sanitize();
-	console.log("res:", res);
-	//return result2;
+const service_1 = require("./service/service");
+const logger_1 = __importDefault(require("./logger/logger"));
+const App = async () => {
+	const URL = "/posts";
+	const requestId = Math.floor(Math.random() * Math.floor(1000));
+	try {
+		const getInputString = await new getInput_1.GetInputString(requestId)
+			.inputString;
+		const sanitizedInput = new sanitizer_1.Sanitizer(
+			getInputString,
+			requestId
+		).sanitize();
+		const result = await new service_1.Service(requestId).postData(
+			URL,
+			sanitizedInput
+		);
+		console.log("\n\n Your sanitized input that post to input:\n", result);
+	} catch (error) {
+		logger_1.default.errorLog(requestId, error);
+		console.log(
+			"\n\n *** OOPS! Something wrong, please follow up your issue with this ID:\n",
+			requestId
+		);
+	}
 };
-test();
+App();
 //# sourceMappingURL=app.js.map

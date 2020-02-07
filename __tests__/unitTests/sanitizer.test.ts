@@ -8,7 +8,7 @@ import {
 	HTML_DATA_SANITIZED
 } from "../../__mocks__/inputToSanitize";
 
-describe("sanitize", () => {
+xdescribe("sanitize", () => {
 	it("simple data", async () => {
 		const requestId = Math.floor(Math.random() * Math.floor(1000));
 

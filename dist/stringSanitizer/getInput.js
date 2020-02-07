@@ -7,13 +7,14 @@ var __importDefault =
 Object.defineProperty(exports, "__esModule", { value: true });
 const logger_1 = __importDefault(require("../logger/logger"));
 const readline_1 = __importDefault(require("readline"));
-const MESSAGE = `Please enter your html code: 
-> NOTE:PLEASE ENTER CTRL+C after entering your input string
-	
-	`;
 class GetInputString {
 	constructor(requestId) {
 		this.requestId = 0;
+		this.exitMessage = "!exit";
+		this.message = `Please enter your html code: 
+> NOTE:PLEASE ENTER [ !exit ] after entering your input string to send your data to an endpoint
+	
+	`;
 		this.inputString = new Promise((resolve, reject) => {
 			let inputString = "";
 			const readlineObject = readline_1.default.createInterface({
@@ -21,11 +22,15 @@ class GetInputString {
 				output: process.stdout
 			});
 			try {
-				readlineObject.question(MESSAGE, data => {
-					inputString += data;
+				readlineObject.question(this.message, data => {
+					!this.checkExit(data)
+						? (inputString += data)
+						: readlineObject.close();
 				});
 				readlineObject.on("line", data => {
-					inputString += ` ${data}`;
+					!this.checkExit(data)
+						? (inputString += ` ${data}`)
+						: readlineObject.close();
 				});
 				readlineObject.on("close", () => {
 					logger_1.default.infoLog(this.requestId, inputString);
@@ -39,6 +44,9 @@ class GetInputString {
 			}
 		});
 		this.requestId = requestId;
+	}
+	checkExit(inputString) {
+		return inputString.toLowerCase() == this.exitMessage ? true : false;
 	}
 }
 exports.GetInputString = GetInputString;

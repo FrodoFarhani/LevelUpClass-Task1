@@ -1,12 +1,13 @@
 import logger from "../logger/logger";
 import readline from "readline";
 
-const MESSAGE = `Please enter your html code: 
-> NOTE:PLEASE ENTER CTRL+C after entering your input string
-	
-	`;
 export class GetInputString {
 	requestId = 0;
+	exitMessage = "!exit";
+	message = `Please enter your html code: 
+> NOTE:PLEASE ENTER [ !exit ] after entering your input string to send your data to an endpoint
+	
+	`;
 	constructor(requestId: number) {
 		this.requestId = requestId;
 	}
@@ -20,11 +21,13 @@ export class GetInputString {
 		});
 
 		try {
-			readlineObject.question(MESSAGE, (data: string) => {
-				inputString += data;
+			readlineObject.question(this.message, (data: string) => {
+				!this.checkExit(data) ? (inputString += data) : readlineObject.close();
 			});
 			readlineObject.on("line", (data: string) => {
-				inputString += ` ${data}`;
+				!this.checkExit(data)
+					? (inputString += ` ${data}`)
+					: readlineObject.close();
 			});
 			readlineObject.on("close", () => {
 				logger.infoLog(this.requestId, inputString);
@@ -37,4 +40,7 @@ export class GetInputString {
 			readlineObject.close();
 		}
 	});
+	private checkExit(inputString: string): boolean {
+		return inputString.toLowerCase() == this.exitMessage ? true : false;
+	}
 }

@@ -1,8 +1,8 @@
 const SIMPLE_DATA = `test string`;
 const SIMPLE_DATA_SANITIZED = `test string`;
-const MARKDOWN_DATA = "Some *emphasis*, **importance**, and `code`.";
+const MARKDOWN_DATA = "Some *emphasis*,! ^@ **importance**, and `code`.";
 const MARKDOWN_DATA_SANITIZED = "Some emphasis, importance, and code.";
-const HTML_DATA = "<p>test string</p><h1>test dfd</h1>";
+const HTML_DATA = "<p>test string</p><h1>test !\n! * &&  dfd</h1>";
 const HTML_DATA_SANITIZED = "test stringtest dfd";
 
 export {
