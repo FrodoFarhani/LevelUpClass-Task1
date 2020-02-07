@@ -3,22 +3,22 @@ import axios from "axios";
 export class Service {
 	private requestId: number;
 	private result = "";
-	private client: any;
-
+	private options: any;
 	constructor(requestId: number) {
 		this.requestId = requestId;
-		const options = {
+		this.options = {
 			baseURL: "https://jsonplaceholder.typicode.com",
 			headers: { "Content-Type": "application/json" }
 		};
-		this.client = axios.create(options);
 	}
 
 	async getData(url: string): Promise<JSON> {
 		return await axios
 			.get(url)
 			.then((response: any) => (this.result = response.data))
-			.catch(this.handleError)
+			.catch((error: any) => {
+				this.handleError(this.requestId, error);
+			})
 			.finally(() => {
 				Promise.resolve(this.result);
 			});
@@ -26,18 +26,19 @@ export class Service {
 
 	async postData(inputText: string): Promise<JSON> {
 		const data = this.createPostData(inputText);
-		return this.client
-			.post('/post', data)
+		return axios
+			.post("/post", data, this.options)
 			.then((response: any) => (this.result = response.data))
-			.catch(this.handleError)
+			.catch((error: any) => {
+				this.handleError(this.requestId, error);
+			})
 			.finally(() => {
 				Promise.resolve(this.result);
 			});
 	}
 
-	private handleError(error: any): Promise<any> {
-		
-		Logger.errorLog(this.requestId, error.statusMessage);
+	private handleError(id: number, error: any): Promise<any> {
+		Logger.errorLog(id, error.message || error);
 		return Promise.reject(error.message || error);
 	}
 	private createPostData(inputText: string) {
