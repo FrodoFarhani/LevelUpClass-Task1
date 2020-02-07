@@ -4,14 +4,12 @@ import { Service } from "./service/service";
 import logger from "./logger/logger";
 
 const App = async (): Promise<void> => {
-	const URL = "/posts";
 	const requestId = Math.floor(Math.random() * Math.floor(1000));
-
 	try {
 		const getInputString = await new GetInputString(requestId).inputString;
 		const sanitizedInput = new Sanitizer(getInputString, requestId).sanitize();
 
-		const result = await new Service(requestId).postData(URL, sanitizedInput);
+		const result = await new Service(requestId).postData(sanitizedInput);
 
 		console.log("\n\n Your sanitized input that post to input:\n", result);
 	} catch (error) {

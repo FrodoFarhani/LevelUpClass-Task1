@@ -4,8 +4,8 @@ jest.mock("axios");
 const mockAxios = axios as jest.Mocked<typeof axios>;
 
 export class MockService {
-	testData: object;
-	constructor(testData: object) {
+	testData: string;
+	constructor(testData: string) {
 		this.testData = testData;
 	}
 	async post() {
@@ -13,7 +13,7 @@ export class MockService {
 		const response = { data: this.testData };
 		mockAxios.post.mockResolvedValue(response);
 
-		const data = await new Service(1).postData(URL, this.testData);
+		const data = await new Service(1).postData(this.testData);
 		return data;
 	}
 }

@@ -2,6 +2,7 @@ import { MockService } from "./../../__mocks__/mockService";
 
 describe("Service", () => {
 	test("Should POST resquest", async () => {
+		const testInput = "test text";
 		const testData = {
 			data: {
 				userId: 1,
@@ -11,7 +12,7 @@ describe("Service", () => {
 			},
 			id: 101
 		};
-		const mockService = new MockService(testData);
+		const mockService = new MockService(testInput);
 		const data = await mockService.post();
 		expect(data).toEqual(testData);
 	});

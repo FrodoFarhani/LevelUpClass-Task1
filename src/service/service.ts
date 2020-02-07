@@ -1,4 +1,3 @@
-//import client from "./client";
 import Logger from "../logger/logger";
 import axios from "axios";
 export class Service {
@@ -25,24 +24,19 @@ export class Service {
 			});
 	}
 
-	async postData(url: string, inputText: any): Promise<JSON> {
+	async postData(inputText: string): Promise<JSON> {
 		const data = this.createPostData(inputText);
 		return this.client
-			.post(url, data)
+			.post('/post', data)
 			.then((response: any) => (this.result = response.data))
 			.catch(this.handleError)
 			.finally(() => {
-				console.log("post data");
-
 				Promise.resolve(this.result);
 			});
 	}
 
 	private handleError(error: any): Promise<any> {
-		console.log(error.statusMessage);
-		console.log("in Error");
-		console.log("reqId", this.requestId);
-
+		
 		Logger.errorLog(this.requestId, error.statusMessage);
 		return Promise.reject(error.message || error);
 	}
