@@ -8,17 +8,12 @@ export class Sanitizer {
 		this.inputString = inputString;
 		this.requestId = requestId;
 	}
-	sanitize(): object {
+	sanitize(): string {
 		const result = S(this.inputString)
 			.stripTags()
 			.stripPunctuation().s;
-		const endPointObject = {
-			userId: 1,
-			id: this.requestId,
-			title: "Sanitizer",
-			body: result
-		};
+
 		logger.infoLog(this.requestId, result);
-		return endPointObject;
+		return result;
 	}
 }

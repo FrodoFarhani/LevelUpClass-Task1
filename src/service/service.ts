@@ -25,7 +25,8 @@ export class Service {
 			});
 	}
 
-	async postData(url: string, data: any): Promise<JSON> {
+	async postData(url: string, inputText: any): Promise<JSON> {
+		const data = this.createPostData(inputText);
 		return this.client
 			.post(url, data)
 			.then((response: any) => (this.result = response.data))
@@ -44,5 +45,13 @@ export class Service {
 
 		Logger.errorLog(this.requestId, error.statusMessage);
 		return Promise.reject(error.message || error);
+	}
+	private createPostData(inputText: string) {
+		return {
+			userId: this.requestId,
+			id: this.requestId,
+			title: "Sanitizer",
+			body: inputText
+		};
 	}
 }
