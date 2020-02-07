@@ -2,7 +2,6 @@ import Logger from "../logger/logger";
 import axios from "axios";
 export class Service {
 	private requestId: number;
-	private result = "";
 	private options: any;
 	constructor(requestId: number) {
 		this.requestId = requestId;
@@ -15,25 +14,19 @@ export class Service {
 	async getData(url: string): Promise<JSON> {
 		return await axios
 			.get(url)
-			.then((response: any) => (this.result = response.data))
+			.then((response: any) => Promise.resolve(response.data))
 			.catch((error: any) => {
 				this.handleError(this.requestId, error);
-			})
-			.finally(() => {
-				Promise.resolve(this.result);
 			});
 	}
 
 	async postData(inputText: string): Promise<JSON> {
 		const data = this.createPostData(inputText);
 		return axios
-			.post("/post", data, this.options)
-			.then((response: any) => (this.result = response.data))
+			.post("/posts", data, this.options)
+			.then((response: any) => Promise.resolve(response.data))
 			.catch((error: any) => {
 				this.handleError(this.requestId, error);
-			})
-			.finally(() => {
-				Promise.resolve(this.result);
 			});
 	}
 

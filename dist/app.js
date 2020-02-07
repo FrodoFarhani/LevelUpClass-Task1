@@ -10,7 +10,6 @@ const sanitizer_1 = require("./stringSanitizer/sanitizer");
 const service_1 = require("./service/service");
 const logger_1 = __importDefault(require("./logger/logger"));
 const App = async () => {
-	const URL = "/posts";
 	const requestId = Math.floor(Math.random() * Math.floor(1000));
 	try {
 		const getInputString = await new getInput_1.GetInputString(requestId)
@@ -20,7 +19,6 @@ const App = async () => {
 			requestId
 		).sanitize();
 		const result = await new service_1.Service(requestId).postData(
-			URL,
 			sanitizedInput
 		);
 		console.log("\n\n Your sanitized input that post to input:\n", result);
