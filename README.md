@@ -7,6 +7,7 @@
 
 # RUN the application
 
-    just run `npm start` in the root directory of the project
+just run `yarn start` in the root directory of the project, and run `yarn test` to run all unit and integration tests.
+logs would be saved in ./logs folder as log files seperately for errors and info.
 
-    > Note: run `npm install` to install all the dependancies first.
+> Note: run `npm install` to install all the dependancies first.
